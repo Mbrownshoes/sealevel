@@ -12,7 +12,21 @@
 var width = 960;
 var hieght = 600;
 
+var path = d3.geo.path()
+	.projection(null);
 
+var svg = d3.select("body")
+			.append("svg")
+			.attr("width", width)
+			.attr("hieght", hieght);
+
+d3.json("build/250D.json", function (error, nanaimo) {
+	if (error) return console.log(error);
+
+	svg.append("path")
+		.datum(topojson.mesh(nanaimo))
+		.attr("d", path);
+});
 
 
 
