@@ -18,20 +18,21 @@ var width = 1060,
 
 // var projection = d3.geo.albers()
 //         .center([-123.95,49.15])
+//         .parallels([45, 55])
 //         .rotate([92.5,0])
-//         .scale(100)
+//         .scale(5000)
 //         .translate([width/2, height/2]);
 	
-// var projection = d3.geo.conicConformal()
-// 							.rotate([98, 0])
-// 						    .center([0, 60])//sides
-// 						    .parallels([-10, 85.5]) //top and bottom
-// 						    .scale(1000)
-// 						    .translate([width / 2, height / 2])
-// 						    .precision(.1);
+var projection = d3.geo.conicConformal()
+							.rotate([98, 0])
+						    .center([10, 60])//sides
+						    .parallels([10, 85.5]) //top and bottom
+						    .scale(1400)
+						    .translate([width / 2, height / 2])
+						    .precision(.1);
 
 var path = d3.geo.path()
-    .projection(null);
+    .projection(projection);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -51,8 +52,7 @@ d3.json("nanaimo.json", function(error, nanaimo) {
 
 	svg.append("path")
 		.datum(topojson.feature(nanaimo, nanaimo.objects.subunits))
-		.attr("d", path)
-		.attr("class", "border");
+		.attr("d", path);
 });
 
 
