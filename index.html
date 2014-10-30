@@ -1,37 +1,58 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+.border {
+	fill: #ddd;
+
+}
 </style>
+
+
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<!-- <script src="http://d3js.org/d3.geom.contour.v0.min.js"></script>
- -->
-<script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<script>
 
-var width = 960;
-var height = 600;
+var width = 1060,
+    height = 1000;
 
-var projection = d3.geo.albers()
-	.scale(1000)
-	.rotate([96, 0]) 
-	.center([-124.131338, 49.097374])
-	.parallels([47.0, 52.26])
+// var projection = d3.geo.albers()
+//         .center([-123.95,49.15])
+//         .rotate([92.5,0])
+//         .scale(100)
+//         .translate([width/2, height/2]);
+	
+// var projection = d3.geo.conicConformal()
+// 							.rotate([98, 0])
+// 						    .center([0, 60])//sides
+// 						    .parallels([-10, 85.5]) //top and bottom
+// 						    .scale(1000)
+// 						    .translate([width / 2, height / 2])
+// 						    .precision(.1);
 
 var path = d3.geo.path()
-	.projection(projection);
+    .projection(null);
 
-var svg = d3.select("body")
-			.append("svg")
-			.attr("width", width)
-			.attr("height", height);
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-d3.json("nanaimo.json", function (error, nanaimo) {
-	if (error) return console.log(error);
+// d3.json("canada.json", function(error, canada) {
+// 	if (error) return console.error(error);
+
+// 	svg.append("path")
+// 		.datum(topojson.feature(canada, canada.objects.subunits))
+// 		.attr("d", path)
+// 		.attr("class", "land");
+// });
+
+d3.json("nanaimo.json", function(error, nanaimo) {
+	if (error) return console.error(error);
 
 	svg.append("path")
-		.datum(topojson.mesh(nanaimo))
-		.attr("d", path);
+		.datum(topojson.feature(nanaimo, nanaimo.objects.subunits))
+		.attr("d", path)
+		.attr("class", "border");
 });
 
 
