@@ -5,22 +5,28 @@
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
-<script src="http://d3js.org/d3.geom.contour.v0.min.js"></script>
-
+<!-- <script src="http://d3js.org/d3.geom.contour.v0.min.js"></script>
+ -->
 <script>
 
 var width = 960;
-var hieght = 600;
+var height = 600;
+
+var projection = d3.geo.albers()
+	.scale(1000)
+	.rotate([96, 0]) 
+	.center([-124.131338, 49.097374])
+	.parallels([47.0, 52.26])
 
 var path = d3.geo.path()
-	.projection(null);
+	.projection(projection);
 
 var svg = d3.select("body")
 			.append("svg")
 			.attr("width", width)
-			.attr("hieght", hieght);
+			.attr("height", height);
 
-d3.json("build/250D.json", function (error, nanaimo) {
+d3.json("nanaimo.json", function (error, nanaimo) {
 	if (error) return console.log(error);
 
 	svg.append("path")
@@ -29,11 +35,6 @@ d3.json("build/250D.json", function (error, nanaimo) {
 });
 
 
-
-
-
-
-
-
-
 </script>
+</body>
+</html>
