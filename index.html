@@ -31,11 +31,11 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
     .attr("class", "border");
 
-d3.json("foobar.json", function(error, foobar) {
+d3.json("merged.json", function(error, merged) {
 	if (error) return console.error(error);
 
 	svg.append("path")
-		.datum(topojson.feature(foobar, foobar.objects.subunits))
+		.datum(topojson.feature(merged, merged.objects.subunits))
 		.attr("d", path);
 });
 
