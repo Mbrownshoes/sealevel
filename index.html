@@ -24,9 +24,9 @@ var width = 1060,
 	
 var projection = d3.geo.conicConformal()
 							.rotate([98, 0])
-						    .center([-26, 49])//sides
+						    .center([-25.9, 49.12])//sides
 						    .parallels([-75, 80.5]) //top and bottom
-						    .scale(190000)
+						    .scale(650000)
 						    .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
@@ -34,7 +34,8 @@ var path = d3.geo.path()
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("class", "border");
 
 // d3.json("canada.json", function(error, canada) {
 // 	if (error) return console.error(error);
