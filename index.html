@@ -22,15 +22,15 @@ var width = 1060,
 //         .scale(5000)
 //         .translate([width/2, height/2]);
 	
-var projection = d3.geo.conicConformal()
-							.rotate([98, 0])
-						    .center([-25.9, 49.12])//sides
-						    .parallels([-75, 80.5]) //top and bottom
-						    .scale(650000)
-						    .translate([width / 2, height / 2]);
+// var projection = d3.geo.conicConformal()
+// 							.rotate([98, 0])
+// 						    .center([-25.9, 49.12])//sides
+// 						    .parallels([-75, 80.5]) //top and bottom
+// 						    .scale(650000)
+// 						    .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
-    .projection(projection);
+    .projection(null);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)

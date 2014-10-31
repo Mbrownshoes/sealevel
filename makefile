@@ -7,15 +7,16 @@ build/subunits.json: build/Boundaries/CD_2011.shp
 
 nanaimo.json: build/subunits.json
 	node_modules/.bin/topojson \
+	--projection='width = 1060, height = 1100, d3.geo.conicConformal() \
+				.rotate([98, 0]) \
+			    .center([-25.9, 49.12]) \
+			    .parallels([-75, 80.5]) \
+			    .scale(650000) \
+			    .translate([width / 2, height / 2])' \
 		-o $@ \
 		-- $<
 			
-# --projection='width = 1060, height = 1100, d3.geo.conicConformal() \
-# 				.rotate([98, 0]) \
-# 			    .center([10, 60]) \
-# 			    .parallels([10, 85.5]) \
-# 			    .scale(1400) \
-# 			    .translate([width / 2, height / 2])' \
+
 
 
 # contour stuff
