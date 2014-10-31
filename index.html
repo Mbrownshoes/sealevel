@@ -2,8 +2,8 @@
 <meta charset="utf-8">
 <style>
 .border {
-	fill: #ddd;
-
+	fill:#ddd;
+	stroke: black;
 }
 </style>
 
@@ -15,19 +15,13 @@
 var width = 1060,
     height = 1000;
 
-// var projection = d3.geo.albers()
-//         .center([-123.95,49.15])
-//         .parallels([45, 55])
-//         .rotate([92.5,0])
-//         .scale(5000)
-//         .translate([width/2, height/2]);
 	
-// var projection = d3.geo.conicConformal()
-// 							.rotate([98, 0])
-// 						    .center([-25.9, 49.12])//sides
-// 						    .parallels([-75, 80.5]) //top and bottom
-// 						    .scale(650000)
-// 						    .translate([width / 2, height / 2]);
+var projection = d3.geo.conicConformal()
+							.rotate([98, 0])
+						    .center([-25.9, 49.12])//sides
+						    .parallels([-75, 80.5]) //top and bottom
+						    .scale(650000)
+						    .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
     .projection(null);
@@ -37,22 +31,23 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
     .attr("class", "border");
 
-// d3.json("canada.json", function(error, canada) {
-// 	if (error) return console.error(error);
-
-// 	svg.append("path")
-// 		.datum(topojson.feature(canada, canada.objects.subunits))
-// 		.attr("d", path)
-// 		.attr("class", "land");
-// });
-
-d3.json("nanaimo.json", function(error, nanaimo) {
+d3.json("foobar.json", function(error, foobar) {
 	if (error) return console.error(error);
 
 	svg.append("path")
-		.datum(topojson.feature(nanaimo, nanaimo.objects.subunits))
-		.attr("d", path);
+		.datum(topojson.mesh(foobar))
+		.attr("d", path)
+		.attr("class", "land");
 });
+
+// d3.json("nanaimo.json", function(error, nanaimo) {
+// 	if (error) return console.error(error);
+
+// 	svg.append("path")
+// 		.datum(topojson.feature(nanaimo, nanaimo.objects.subunits))
+// 		.attr("d", path);
+// });
+
 
 
 </script>
