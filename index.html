@@ -7,7 +7,6 @@
 }
 </style>
 
-
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -25,11 +24,10 @@ var width = 1060,
 	
 var projection = d3.geo.conicConformal()
 							.rotate([98, 0])
-						    .center([10, 60])//sides
-						    .parallels([10, 85.5]) //top and bottom
-						    .scale(1400)
-						    .translate([width / 2, height / 2])
-						    .precision(.1);
+						    .center([-26, 49])//sides
+						    .parallels([-75, 80.5]) //top and bottom
+						    .scale(190000)
+						    .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
     .projection(projection);
