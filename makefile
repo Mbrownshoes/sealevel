@@ -5,14 +5,8 @@ build/subunits.json: build/Boundaries/CD_2011.shp
 	build/subunits.json \
 	build/Boundaries/CD_2011.shp
 
-nanaimo.json: build/subunits.json build/250DG.json
+nanaimo.json: build/subunits.json
 	node_modules/.bin/topojson \
-	--projection='width = 1060, height = 1100, d3.geo.conicConformal() \
-				.rotate([98, 0]) \
-			    .center([-25.9, 49.12]) \
-			    .parallels([-75, 80.5]) \
-			    .scale(650000) \
-			    .translate([width / 2, height / 2])' \
 		-o $@ \
 		-- $<
 			
@@ -31,15 +25,9 @@ build/Geocontours.json: merged/contours.shp
 # make Topojson file
 build/contours.json: build/Geocontours.json
 	node_modules/.bin/topojson \
-	--projection='width = 1060, height = 1100, d3.geo.conicConformal() \
-				.rotate([98, 0]) \
-			    .center([-25.9, 49.12]) \
-			    .parallels([-75, 80.5]) \
-			    .scale(650000) \
-			    .translate([width / 2, height / 2])' \
 	-o $@ \
 	-p elevation="ELEVATION" \
-	--simplify=0.5 \
+	--simplify=none \
 	--filter=none \
 	-- contours=$<
 

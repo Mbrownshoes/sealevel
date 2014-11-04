@@ -12,7 +12,7 @@
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
 	<script>
 
-var width = 500,
+var width = 1200,
     height = 960;
 
 	
@@ -20,11 +20,11 @@ var projection = d3.geo.conicConformal()
 							.rotate([98, 0])
 						    .center([-25.9, 49.12])//sides
 						    .parallels([-75, 80.5]) //top and bottom
-						    .scale(650000)
-						    .translate([width / 2, height / 2]);
+						    .scale(1)
+						    .translate([0,0]);
 
 var path = d3.geo.path()
-    .projection(null);
+    .projection(projection);
 
 // setup canvas
 var svg = d3.select("body").append("svg")
