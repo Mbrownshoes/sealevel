@@ -49,7 +49,7 @@ d3.json("merged.json", function(error, merged) {
 	if (error) return console.error(error);
 
 	// first variable is used to center and scale map the viewport
-	var bTopo = topojson.feature(merged, merged.objects.E251A),
+	var bTopo = topojson.feature(merged, merged.objects.contours),
 		topo = bTopo.features;
 
 	// calculate the range for colors basend on the elevation property
