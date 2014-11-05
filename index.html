@@ -6,6 +6,7 @@
 #map {
   width: 960px;
   height: 500px;
+  background: none;
 }
 svg {
   position: relative;
@@ -31,11 +32,11 @@ svg {
 var map = L.map('map').setView([49.1642, -123.9364], 11);
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; ' + mapLink + ' Contributors',
-            maxZoom: 18,
-            }).addTo(map);
+        // L.tileLayer(
+        //     'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     attribution: '&copy; ' + mapLink + ' Contributors',
+        //     maxZoom: 18,
+        //     }).addTo(map);
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
@@ -134,9 +135,10 @@ function reset() {
 	feature.attr("d", path)
 	.style("fill", "none")
 	.style("stroke", function(d, i) {
-			if (d.properties.elevation < 20) {return "steelblue"}
+			if (d.properties.elevation < 40) {return "steelblue"}
 				else
-				{return interp(cScale(d.properties.elevation))};
+				{return "none"}
+				// {return interp(cScale(d.properties.elevation))};
 		})
         .on("mouseover", highlight) // just a little example of what's available in terms of interaction
         .on("mouseout", function (d,i) {unhighlight(this,d); 

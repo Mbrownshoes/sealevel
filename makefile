@@ -1,4 +1,4 @@
-# get map of Canada and widdle down to Nanaimo
+# get BC census boundary and widdle downt to Nanaimo
 
 build/subunits.json: build/Boundaries/CD_2011.shp
 	ogr2ogr -f GeoJSON  -t_srs "+proj=latlong +datum=WGS84" -where "CDNAME IN ('Nanaimo')" \
@@ -23,13 +23,13 @@ build/Geocontours.json: merged/contours.shp
 	ogr2ogr -f GeoJSON build/Geocontours.json -t_srs "+proj=latlong +datum=WGS84" merged/contours.shp
 
 # make Topojson file
-build/contours.json: build/Geocontours.json
-	node_modules/.bin/topojson \
+build/elevation.json: merged/contours/contours.shp
+	node --max_old_space_size=8192 `which topojson` \
+	--projection='d3.geo.conicConformal()' \
 	-o $@ \
-	-p elevation="ELEVATION" \
 	--simplify=none \
 	--filter=none \
-	-- contours=$<
+	-- elevation=$<
 
 
 
