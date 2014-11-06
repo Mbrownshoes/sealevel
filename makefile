@@ -16,20 +16,20 @@ nanaimo.json: build/subunits.json
 # First merge all the shapefiles
 
 # run this in terminal to merge all contour shp files
-	# for i in $(ls build/*.shp); do ogr2ogr -f 'ESRI Shapefile' -update -append merged $i -nln contours done
+	# for i in $(ls build/*.shp); do ogr2ogr -f 'ESRI Shapefile' -where "ELEVATION < 5" -update -append merged_160cm $i -nln contours done
 
 # make Geojson file
-build/Geocontours.json: merged/contours.shp
-	ogr2ogr -f GeoJSON build/Geocontours.json -t_srs "+proj=latlong +datum=WGS84" merged/contours.shp
+build/Geocontours.json: merged_160cm/contours.shp
+	ogr2ogr -f GeoJSON build/Geocontours.json -t_srs "+proj=latlong +datum=WGS84" merged_160cm/contours.shp
 
 # make Topojson file
-build/elevation.json: merged/contours/contours.shp
-	node --max_old_space_size=8192 `which topojson` \
-	--projection='d3.geo.conicConformal()' \
+build/contours.json: build/Geocontours.json
+	node_modules/.bin/topojson \
 	-o $@ \
 	--simplify=none \
 	--filter=none \
-	-- elevation=$<
+	-p elevation="ELEVATION" \
+	-- contours=$<
 
 
 
